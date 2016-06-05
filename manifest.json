@@ -5,9 +5,9 @@
   "description": "JMaps authentication extension",
   "browser_action": {
     "name": "",
-    "icons": ["facebook.png"],
-    "default_icon": "facebook.png",
-    "default_popup" : "popup.html"
+    "icons": ["icons/facebook.png"],
+    "default_icon": "icons/facebook.png",
+    "default_popup" : "popup/popup.html"
   },
   "background": {
         "persistent":true,
