@@ -14,7 +14,7 @@
         "page":"background.html"
   },
   "content_scripts": [ {
-    "js": ["jquery-2.2.4.min.js"],
+    "js": ["bower_components/jquery/dist/jquery.min.js"],
     "run_at": "document_end",
     "css":[],
     "matches": [ "http://www.google.co.in/*",
@@ -24,6 +24,8 @@
     "webRequest",
     "tabs",
     "http://*/",
-    "https://*/"
+    "https://*/",
+    "storage",
+    "identity"
   ]
 }

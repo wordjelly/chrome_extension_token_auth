@@ -1,19 +1,26 @@
 <html>
-<head>
-	<!-- add the stylesheets and javascripts. -->
-	  <!-- FONT
-	  –––––––––––––––––––––––––––––––––––––––––––––––––– 
-	  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">	
-		-->
+	<head>
+		  <link rel="stylesheet" href="../bower_components/skeleton/css/normalize.css">
+		  <link rel="stylesheet" href="../bower_components/skeleton/css/skeleton.css">
+		  <script src="../bower_components/js-url/url.min.js"></script>
+		  <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+		  <script src="../common_scripts/remote_interface.js"></script>
+		  <script src="popup.js"></script>
+	</head>
+	<body>
 
-	  <!-- CSS
-	  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-	  <link rel="stylesheet" href="bower_components/skeleton/css/normalize.css">
-	  <link rel="stylesheet" href="bower_components/skeleton/css/skeleton.css">
-</head>
-<body>
-<div style="padding:20px">
-<button class="button-primary">Button element</button>
-</div>
-</body>
+		<div class="container centered">
+				
+			<div id="auth_token_status">
+			
+			</div>
+
+			<div>
+			Welcome to JMaps!
+			</div>
+			
+			<button class="button-primary" id="sign_in">Sign In To Save Your JMaps</button>
+			
+		</div>
+	</body>
 </html>
