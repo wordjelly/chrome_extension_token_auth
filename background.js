@@ -1,11 +1,16 @@
 chrome.extension.onMessage.addListener( function(request,sender,sendResponse)
 {
-    console.log("got the message");
-    if( request.action === "sign_in" )
-    {
-        
+
+    if( request.action === "sign_in" ){
         launch_web_auth_flow_and_store_access_token();
-        console.log("got the incoming action");
-        sendResponse({result : 'completed'});        
+        sendResponse({result : 'completed'});  
+        return false;      
+    }
+    else if(request.action === "check_auth_token"){
+    	get_auth_token(function(auth_t){
+    		var q = {token : auth_t};
+    		sendResponse(q);
+    	});
+    	return true;
     }
 });

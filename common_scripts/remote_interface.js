@@ -22,14 +22,22 @@ Launches the chrome_web_auth_flow and gets the access token.
 authentication_token=
 ****/
 function launch_web_auth_flow_and_store_access_token(){
-	redirect_url = chrome.identity.getRedirectURL();
-
-	
-    chrome.identity.launchWebAuthFlow(
-        {'url': sign_up_url + "?redirect_url="+ redirect_url + "oauth2", 'interactive': true},
-        function(redir) { 
-            alert("this is the redir:" + redir);
-     });
+    var auth_token = get_auth_token();
+    if(auth_token == null){
+    	redirect_url = chrome.identity.getRedirectURL();
+        chrome.identity.launchWebAuthFlow(
+            {'url': sign_up_url + "?redirect_url="+ redirect_url + "oauth2", 'interactive': true},
+            function(redir) { 
+               // console.log("the redir url is:" + redir);
+                auth_token = $.url("?authentication_token",redir);
+                //console.log("the authentication token part is:" + auth_token);
+                set_auth_token(auth_token);
+                return auth_token;
+         });
+    }
+    else{
+        return auth_token;
+    }
     
 }
 
@@ -53,17 +61,19 @@ function post_jmap(){
 /***
 @return : auth_token[String] - string or null.
 ****/
-function get_auth_token(){
-
+function get_auth_token(fn){
+   
 	chrome.storage.local.get(auth_token_key, function (result) {
-        if(result.auth_token_key == null){
-        	return null
+         
+        if(result[auth_token_key] == null){
+          
+        	fn(null);
         }
         else{
-        	return result.auth_token_key
+              
+        	fn(result[auth_token_key]);
         }
     });
-
 }
 
 /****
@@ -71,9 +81,19 @@ function get_auth_token(){
 @return: null.
 ****/
 function set_auth_token(auth_token){
+    //console.log("came to set the auth token");
+
 	if(auth_token != null){
-		chrome.storage.sync.set({auth_token_key: auth_token}, function() {
-		         	
-		});
+	    //console.log("the auth token is not null");
+        obj = {};
+        obj[auth_token_key] = auth_token;
+    	chrome.storage.local.set(obj, function() {
+		      //console.log("finished setting the token");
+		      //console.log("getting it responds with:");
+              //console.log("auth token key is:" + auth_token_key);
+              chrome.storage.local.get(auth_token_key,function(result){
+                //console.log(result);
+              });
+        });
 	}
 }
