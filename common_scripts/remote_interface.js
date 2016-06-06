@@ -24,14 +24,13 @@ authentication_token=
 function launch_web_auth_flow_and_store_access_token(){
 	redirect_url = chrome.identity.getRedirectURL();
 
+	
     chrome.identity.launchWebAuthFlow(
-        {'url': sign_up_url + "?redirect_url="+ redirect_url, 'interactive': true},
+        {'url': sign_up_url + "?redirect_url="+ redirect_url + "oauth2", 'interactive': true},
         function(redir) { 
-            
-        	set_auth_token($.url('?authentication_token',redir));
-        	
-
+            alert("this is the redir:" + redir);
      });
+    
 }
 
 /***
