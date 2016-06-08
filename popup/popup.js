@@ -1,8 +1,15 @@
-$(document).on('click','#sign_in',function(){
-	chrome.extension.sendMessage({action: "sign_in"},
+$(document).on('click','#sign_up',function(){
+	chrome.extension.sendMessage({action: "sign_up"},
         function (response) {
     });
 });
+
+$(document).on('click','#get_user',function(){
+	chrome.extension.sendMessage({action: "get_user"},
+        function (response) {
+    });
+});
+
 $(document).ready(function(){
 	
 	chrome.extension.sendMessage({action: "check_auth_token"},function(response){
